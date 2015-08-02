@@ -9,7 +9,7 @@
     <script>
       'use strict';
 
-      var client = new BinaryClient('ws://localhost:1337');
+      var client = new BinaryClient('ws://127.0.0.1:1337');
 
       client.on('stream', function(stream, meta){
         console.log('stream');
