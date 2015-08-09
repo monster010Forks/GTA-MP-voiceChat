@@ -1,5 +1,7 @@
+//importScripts('libmp3lame.min.js');
+
 var recLength = 0,
-  recBuffers = [],
+  recBuffer = [],
   sampleRate,
   numChannels;
 
@@ -23,21 +25,15 @@ this.onmessage = function(e){
 function init(config) {
   sampleRate = config.sampleRate;
   numChannels = config.numChannels;
-  initBuffers();
 }
 
 function record(inputBuffer) {
-  recBuffers[0].push(inputBuffer[0]);
+  recBuffer = inputBuffer[0];
   recLength += inputBuffer[0].length;
 }
 
 function exportWAV(type) {
-  var buffers = [];
-  for (var channel = 0; channel < numChannels; channel++){
-    buffers.push(mergeBuffers(recBuffers[channel], recLength));
-  }
-
-  var dataview = encodeWAV(buffers[0]);
+  var dataview = encodeWAV(mergeBuffers(recBuffer, recLength));
   var audioBlob = new Blob([dataview], { type: type });
 
   this.postMessage(audioBlob);
@@ -45,23 +41,14 @@ function exportWAV(type) {
 
 function clear(){
   recLength = 0;
-  recBuffers = [];
-  initBuffers();
+  recBuffer = [];
 }
 
-function initBuffers(){
-  for (var channel = 0; channel < numChannels; channel++){
-    recBuffers[channel] = [];
-  }
-}
-
-function mergeBuffers(recBuffers, recLength){
+function mergeBuffers(recBuffer, recLength){
   var result = new Float32Array(recLength);
   var offset = 0;
-  for (var i = 0; i < recBuffers.length; i++){
-    result.set(recBuffers[i], offset);
-    offset += recBuffers[i].length;
-  }
+  result.set(recBuffer, offset);
+  offset += recBuffer.length;
   return result;
 }
 
@@ -82,12 +69,10 @@ function encodeWAV(samples){
   var buffer = new ArrayBuffer(44 + samples.length * 2);
   var view = new DataView(buffer);
 
-
-
   /* RIFF identifier */
   writeString(view, 0, 'RIFF');
   /* RIFF chunk length */
-  view.setUint32(4, 36 + samples.length * 2, true);
+  view.setUint32(4, 32 + samples.length * 2, true);
   /* RIFF type */
   writeString(view, 8, 'WAVE');
   /* format chunk identifier */
@@ -97,13 +82,13 @@ function encodeWAV(samples){
   /* sample format (raw) */
   view.setUint16(20, 1, true);
   /* channel count */
-  view.setUint16(22, numChannels, true);
+  view.setUint16(22, 1, true);
   /* sample rate */
   view.setUint32(24, sampleRate, true);
   /* byte rate (sample rate * block align) */
-  view.setUint32(28, sampleRate * 4, true);
+  view.setUint32(28, sampleRate * 2, true);
   /* block align (channel count * bytes per sample) */
-  view.setUint16(32, numChannels * 2, true);
+  view.setUint16(32, 2, true);
   /* bits per sample */
   view.setUint16(34, 16, true);
   /* data chunk identifier */

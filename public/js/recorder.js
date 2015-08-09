@@ -7,7 +7,7 @@
   let Recorder = function(source) {
     let socket = io.connect('http://127.0.0.1:1337');
 
-    let bufferLen = 4096;
+    let bufferLen = 16384;
     let numChannels = 1;
 
     this.context = source.context;
