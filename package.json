@@ -1,6 +1,6 @@
 {
   "name": "voicechat",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "GTA-MP voice chat",
   "repository": "https://github.com/Cludch/GTA-MP-voiceChat",
   "bugs": "https://github.com/Cludch/GTA-MP-voiceChat/issues",
@@ -16,7 +16,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "binaryjs": "^0.2.1",
-    "express": "^4.13.2"
+    "express": "^4.13.2",
+    "socket.io": "^1.3.6"
   }
 }

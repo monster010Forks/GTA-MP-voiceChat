@@ -14,7 +14,7 @@ module.exports = class WebServer {
    */
   constructor(port) {
     port = parseInt(port);
-    // Validate port var
+    // Validate port variable
     if(isNaN(port)) {
       port = 8080;
     }

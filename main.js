@@ -21,7 +21,8 @@ function main(port, webserverPort) {
     new Webserver(webserverPort);
 
     console.log("\n----- GTA-MP voice chat -----");
-    console.log("Authors: Cludch, derbl4ck");
+    console.log("Authors: Cludch");
+    console.log("Contributors: derbl4ck");
     console.log(`Port: ${port}`);
     console.log(`Web server port: ${webserverPort}`);
     console.log("-----------------------------\n");

@@ -1,6 +1,6 @@
 # GTA-MP voice chat
 
-GTA-MP-voiceChat is a voice chat package for the GTA V modification GTA-MP.
+GTA-MP-voiceChat is a voice chat package for the GTA V multiplayer modification GTA-MP.
 
 The first version will feature only the server side features because we can not
 write the client side part currently.
@@ -8,7 +8,7 @@ But we will prepare as much as possible and adapt the client side part when GTA-
 
 ## Version
 
-0.1.0 - No GTA-MP Client integration
+0.1.0
 
 ## Installation
 
@@ -19,16 +19,19 @@ But we will prepare as much as possible and adapt the client side part when GTA-
 
 ## Todos
 
- - First release
+ - GTA-MP client integration (+ remove the testing web server)
+ - Fix issue #1
 
 ## Changelog
 
-##### 1.0 (xx.xx.xx)
+##### 0.1.0 (09.08.2015)
 
  - First release
+ - Created a global voice chat
+ - Added a browser client until GTA-MP is released, before we can not create client side code
 
 ## Scripts used
- - None yet
+ - https://github.com/mattdiamond/Recorderjs
 
 ##  Bitcoin
 If you want to donate me some coffee for further developments, my Bitcoin address is `16w7umTeoJfPzZnDbQtuefrPRssq21jhJ5`

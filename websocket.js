@@ -14,17 +14,20 @@ module.exports = class WebSocket {
    */
   constructor(port) {
     port = parseInt(port);
-    // Validate port var
+    // Validate port variable
     if(isNaN(port)) {
       port = 8080;
     }
 
     // Start the websocket server
-    let binaryServer = require('binaryjs').BinaryServer;
-    let websocketServer = binaryServer({port});
+    var io = require('socket.io')(port);
+    console.log(`Successfully started the websocket on port ${port}`);
 
-    websocketServer.on('connection', function(client) {
-      console.log(client);
+    io.on('connection', function (socket) {
+      socket.on('audioData', function(data) {
+        // Forward the received data to every client
+        socket.broadcast.emit('audioData', data);
+      });
     });
   }
 };

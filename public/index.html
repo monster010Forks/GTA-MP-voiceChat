@@ -1,19 +1,52 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html>
-  <head>
-    <title>voice chat development environment by Cludch</title>
-  </head>
-  <body>
-    Hellooooo-ooo it's Urban calling!
-    <script src="http://cdn.binaryjs.com/0/binary.js"></script>
-    <script>
-      'use strict';
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Voice chat by Cludch</title>
+  <script src="https://cdn.socket.io/socket.io-1.3.6.js"></script>
+	<script src="js/recorder.js"></script>
+</head>
+<body>
+  <button onclick="startSending(this);">Send</button>
+  <button onclick="stopSending(this);" disabled>Stop sending</button>
 
-      var client = new BinaryClient('ws://127.0.0.1:1337');
+  <script>
+  'use strict';
 
-      client.on('stream', function(stream, meta){
-        console.log('stream');
-      });
-    </script>
-  </body>
+  let audio_context;
+  let recorder;
+
+  function startUserMedia(stream) {
+    let input = audio_context.createMediaStreamSource(stream);
+    recorder = new Recorder(input);
+  }
+
+  function startSending(button) {
+    recorder && recorder.record();
+    button.disabled = true;
+    button.nextElementSibling.disabled = false;
+  }
+
+  function stopSending(button) {
+    recorder && recorder.stop();
+    button.disabled = true;
+    button.previousElementSibling.disabled = false;
+
+    recorder.clear();
+  }
+
+  window.onload = function init() {
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+    window.URL = window.URL || window.webkitURL;
+
+    audio_context = new AudioContext();
+
+    navigator.getUserMedia({audio: true}, startUserMedia, function(err) {
+      console.log(err.name);
+    });
+  };
+  </script>
+</body>
 </html>
