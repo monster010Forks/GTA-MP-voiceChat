@@ -8,7 +8,7 @@ But we will prepare as much as possible and adapt the client side part when GTA-
 
 ## Version
 
-0.1.0
+0.1.1
 
 ## Installation
 
@@ -22,7 +22,16 @@ But we will prepare as much as possible and adapt the client side part when GTA-
  - GTA-MP client integration (+ remove the testing web server)
  - Direct communication -> look up which player is near the sending player
  - Associate server player object with socket on player connection
- - Fix issue #1
+ - Code cleanup
+ - Rewrite Recoder functions as a ES6 class
+
+## Future Milestones
+
+##### 0.2.0
+ - MP3 instead of WAV
+
+##### 1.0
+ - GTA-MP client integration
 
 ## Changelog
 
@@ -31,6 +40,10 @@ But we will prepare as much as possible and adapt the client side part when GTA-
  - First release
  - Created a global voice chat
  - Added a browser client until GTA-MP is released, before we can not create client side code
+
+##### 0.1.1 (09.08.2015)
+ - Removed junk code
+ - Fixed voice stuttering
 
 ## Scripts used
  - https://github.com/mattdiamond/Recorderjs

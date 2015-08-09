@@ -1,5 +1,3 @@
-//importScripts('libmp3lame.min.js');
-
 var recLength = 0,
   recBuffer = [],
   sampleRate,
@@ -39,12 +37,12 @@ function exportWAV(type) {
   this.postMessage(audioBlob);
 }
 
-function clear(){
+function clear() {
   recLength = 0;
   recBuffer = [];
 }
 
-function mergeBuffers(recBuffer, recLength){
+function mergeBuffers(recBuffer, recLength) {
   var result = new Float32Array(recLength);
   var offset = 0;
   result.set(recBuffer, offset);
@@ -52,20 +50,20 @@ function mergeBuffers(recBuffer, recLength){
   return result;
 }
 
-function floatTo16BitPCM(output, offset, input){
+function floatTo16BitPCM(output, offset, input) {
   for (var i = 0; i < input.length; i++, offset+=2){
     var s = Math.max(-1, Math.min(1, input[i]));
     output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
   }
 }
 
-function writeString(view, offset, string){
+function writeString(view, offset, string) {
   for (var i = 0; i < string.length; i++){
     view.setUint8(offset + i, string.charCodeAt(i));
   }
 }
 
-function encodeWAV(samples){
+function encodeWAV(samples) {
   var buffer = new ArrayBuffer(44 + samples.length * 2);
   var view = new DataView(buffer);
 
