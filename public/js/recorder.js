@@ -5,7 +5,7 @@
   const WORKER_PATH = 'js/recorderWorker.js';
 
   let Recorder = function(source) {
-    let socket = io.connect('http://localhost:1337');
+    let socket = io.connect('http://127.0.0.1:1337');
 
     let bufferLen = 4096;
     let numChannels = 1;
@@ -76,7 +76,6 @@
         type: type
       });
     }
-
 
     worker.onmessage = function(e) {
       let blob = e.data;

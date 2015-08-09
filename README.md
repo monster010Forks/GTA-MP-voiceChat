@@ -20,6 +20,8 @@ But we will prepare as much as possible and adapt the client side part when GTA-
 ## Todos
 
  - GTA-MP client integration (+ remove the testing web server)
+ - Direct communication -> look up which player is near the sending player
+ - Associate server player object with socket on player connection
  - Fix issue #1
 
 ## Changelog
