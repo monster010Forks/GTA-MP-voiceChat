@@ -30,7 +30,11 @@ But we will prepare as much as possible and adapt the client side part when GTA-
 ##### 0.2.0
  - MP3 instead of WAV
 
-##### 1.0
+##### 0.3.0
+ - Associate player object with the socket
+ - Direct communication
+
+##### 1.0.0
  - GTA-MP client integration
 
 ## Changelog
