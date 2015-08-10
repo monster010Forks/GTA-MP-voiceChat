@@ -25,6 +25,9 @@ But we will prepare as much as possible and adapt the client side part when GTA-
  - Code cleanup
  - Rewrite Recoder functions as a ES6 class
 
+## Trello Board
+ - https://trello.com/b/vuKHOi0G/gta-mp-voice-chat
+
 ## Future Milestones
 
 ##### 0.2.0
