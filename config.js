@@ -9,5 +9,6 @@
 
 module.exports = {
     port: 1337,
-    webserverPort: 8080
+    webserverPort: 8080,
+    directChatRadius: 100
 };
