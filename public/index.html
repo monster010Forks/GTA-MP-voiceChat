@@ -17,9 +17,13 @@
   let audio_context;
   let recorder;
 
+	let socket = io.connect('http://127.0.0.1:1337');
+
+	socket.emit('set networkId', 1);
+
   function startUserMedia(stream) {
     let input = audio_context.createMediaStreamSource(stream);
-    recorder = new Recorder(input);
+    recorder = new Recorder(input, socket);
   }
 
   function startSending(button) {

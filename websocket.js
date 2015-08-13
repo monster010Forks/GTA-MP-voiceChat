@@ -28,6 +28,11 @@ module.exports = class WebSocket {
         // Forward the received data to every client
         socket.broadcast.emit('audioData', data);
       });
+
+      socket.on('set networkId', function(networkId) {
+        socket.networkId = networkId;
+      });
+      
     });
   }
 };

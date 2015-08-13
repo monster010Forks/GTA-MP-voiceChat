@@ -8,7 +8,7 @@ But we will prepare as much as possible and adapt the client side part when GTA-
 
 ## Version
 
-0.1.1
+0.1.2
 
 ## Installation
 
@@ -21,7 +21,6 @@ But we will prepare as much as possible and adapt the client side part when GTA-
 
  - GTA-MP client integration (+ remove the testing web server)
  - Direct communication -> look up which player is near the sending player
- - Associate server player object with socket on player connection
  - Code cleanup
  - Rewrite Recoder functions as a ES6 class
 
@@ -51,6 +50,9 @@ But we will prepare as much as possible and adapt the client side part when GTA-
 ##### 0.1.1 (09.08.2015)
  - Removed junk code
  - Fixed voice stuttering
+
+##### 0.1.2 (13.08.2015)
+ - Added `networkId` property to the socket to associate the socket with the player
 
 ## Scripts used
  - https://github.com/mattdiamond/Recorderjs
