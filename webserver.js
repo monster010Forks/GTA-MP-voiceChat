@@ -21,7 +21,6 @@ module.exports = class WebServer {
 
     let express = require('express');
     let app = express();
-    let httpServer = require('http').Server(app);
 
     app.use(express.static(__dirname + '/public'));
 
@@ -29,7 +28,7 @@ module.exports = class WebServer {
       res.sendFile('index.html');
     });
 
-    httpServer.listen(port, function() {
+    app.listen(port, function() {
       console.log(`Successfully started the web server on port ${port}`);
     });
   }
