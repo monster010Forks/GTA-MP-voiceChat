@@ -59,3 +59,5 @@ License
 ----
 
 MIT
+
+EXCEPT the MP3 lame lib, which is published under the license terms as lame.
