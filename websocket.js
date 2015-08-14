@@ -30,18 +30,23 @@ module.exports = class WebSocket {
       socket.on('audioData', function(data) {
         let player = utility.getPlayer(socket.networkId);
         // Should be ALWAYS false
-        if(typeof player !== 'undefined') {
-          for(let tempPlayer of g_players) {
-            // Check if the player is in range of the speaking player
-            let playerDistanceToPointInRange = utility.playerDistanceToPointInRange(tempPlayer, config.directChatRadius, socket.player.position.x, socket.player.position.y, socket.player.position.z);
-            if(typeof playerDistanceToPointInRange === 'number') {
-              // Is in range, so search the socket of the receiving player
-              for(let tempSocket of io.sockets.connected) {
-                // Check if this socket belongs to one of the supposed receiving players
-                if(tempSocket.networkId === tempPlayer.networkId) {
-                  tempSocket.emit('audioData', {data: data.data, volume: (playerDistanceToPointInRange / (config.directChatRadius * config.directChatRadius))});
-                }
-              }
+        if(typeof player === 'undefined') {
+          return;
+        }
+
+        for(let tempPlayer of g_players) {
+          // Check if the player is in range of the speaking player
+          let playerDistanceToPointInRange = utility.playerDistanceToPointInRange(tempPlayer, config.directChatRadius, socket.player.position.x, socket.player.position.y, socket.player.position.z);
+
+          if(typeof playerDistanceToPointInRange !== 'number') {
+            return;
+          }
+
+          // Is in range, so search the socket of the receiving player
+          for(let tempSocket of io.sockets.connected) {
+            // Check if this socket belongs to one of the supposed receiving players
+            if(tempSocket.networkId === tempPlayer.networkId) {
+              tempSocket.emit('audioData', {data: data.data, volume: (playerDistanceToPointInRange / (config.directChatRadius * config.directChatRadius))});
             }
           }
         }
