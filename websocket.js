@@ -46,7 +46,7 @@ module.exports = class WebSocket {
 
           // Is in range, so search the socket of the receiving player
           if(!playerSocket.has(tempPlayer.networkId)) {
-            console.warn(`No recipent socket for networkId ${tempPlayer.networkId} found.`);
+            console.warn(`No recipient socket for networkId ${tempPlayer.networkId} found.`);
             return;
           }
           playerSocket.get(tempPlayer.networkId).emit('audioData', {data: data.data, volume: (playerDistanceToPointInRange / (config.directChatRadius * config.directChatRadius))});
