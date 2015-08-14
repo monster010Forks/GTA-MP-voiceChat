@@ -19,7 +19,7 @@
 
 	let socket = io.connect('http://127.0.0.1:1337');
 
-	socket.emit('set networkId', 1);
+	socket.emit('set networkId', Math.floor(Math.random() * 100) + 1  );
 
   function startUserMedia(stream) {
     let input = audio_context.createMediaStreamSource(stream);
