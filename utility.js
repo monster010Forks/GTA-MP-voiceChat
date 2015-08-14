@@ -28,6 +28,8 @@ utility.getPlayer = (networkId) => {
 
 /**
  * Returns the players distance to a point if the player is still in a given range
+ *
+ * This function was originally written by Extreme @ forum.GTA-MP.net
  * @param  {Player} player player object
  * @param  {number} range
  * @param  {number} x coordinate
