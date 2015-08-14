@@ -7,6 +7,9 @@
 
 'use strict';
 
+let config = require('./config');
+let utility = require('./utility');
+
 module.exports = class WebSocket {
   /**
    * Starts the socket and webserver on a given port
@@ -25,14 +28,34 @@ module.exports = class WebSocket {
 
     io.on('connection', function (socket) {
       socket.on('audioData', function(data) {
-        // Forward the received data to every client
-        socket.broadcast.emit('audioData', data);
+        let player = utility.getPlayer(socket.networkId);
+        // Should be ALWAYS false
+        if(typeof player !== 'undefined') {
+          for(let tempPlayer of g_players) {
+            // Check if the player is in range of the speaking player
+            let playerDistanceToPointInRange = utility.playerDistanceToPointInRange(tempPlayer, config.directChatRadius, socket.player.position.x, socket.player.position.y, socket.player.position.z);
+            if(typeof playerDistanceToPointInRange === 'number') {
+              // Is in range, so search the socket of the receiving player
+              for(let tempSocket of io.sockets.connected) {
+                // Check if this socket belongs to one of the supposed receiving players
+                if(tempSocket.networkId === tempPlayer.networkId) {
+                  tempSocket.emit('audioData', {data: data.data, volume: (playerDistanceToPointInRange / (config.directChatRadius * config.directChatRadius))});
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // Like a global voice chat
+      // Temporary only for web testing the voice chat in general
+      socket.on('web audioData', function(data) {
+        socket.broadcast.emit('web audioData', {data: data.data, volume: 1});
       });
 
       socket.on('set networkId', function(networkId) {
         socket.networkId = networkId;
       });
-      
     });
   }
 };

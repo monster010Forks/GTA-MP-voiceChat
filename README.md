@@ -8,7 +8,7 @@ But we will prepare as much as possible and adapt the client side part when GTA-
 
 ## Version
 
-0.1.2
+0.2.0
 
 ## Installation
 
@@ -20,9 +20,8 @@ But we will prepare as much as possible and adapt the client side part when GTA-
 ## Todos
 
  - GTA-MP client integration (+ remove the testing web server)
- - Direct communication -> look up which player is near the sending player
  - Code cleanup
- - Rewrite Recoder functions as a ES6 class
+ - Rewrite Recorder functions as a ES6 class
 
 ## Trello Board
  - https://trello.com/b/vuKHOi0G/gta-mp-voice-chat
@@ -30,14 +29,17 @@ But we will prepare as much as possible and adapt the client side part when GTA-
 ## Future Milestones
 
 ##### 0.2.0
- - MP3 instead of WAV
-
-##### 0.3.0
  - Associate player object with the socket
  - Direct communication
 
+##### 0.3.0
+ - MP3 instead of WAV
+
 ##### 1.0.0
  - GTA-MP client integration
+
+##### 1.x.0
+ - Make it more realistic, add voice panning
 
 ## Changelog
 
@@ -53,6 +55,16 @@ But we will prepare as much as possible and adapt the client side part when GTA-
 
 ##### 0.1.2 (13.08.2015)
  - Added `networkId` property to the socket to associate the socket with the player
+
+##### 0.2.0 (14.08.2015)
+ - The sockets now has a property called `networkId` which contains the network id of the player.
+ - You can now define the direct voice chat radius in the `config.js`
+ - Added utility functions
+   - Added a function to get the player object by a given network id
+   - Added a function to check return a players distance of given coordinates
+ - Added non-performant way of getting the nearest players + the socket of the nearest players
+ - Added volume decreasing depending on the players distance to the speaking player
+
 
 ## Scripts used
  - https://github.com/mattdiamond/Recorderjs

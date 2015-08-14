@@ -26,8 +26,8 @@
     let recording = false;
     var currCallback = function() {};
 
-    socket.on('audioData', function(data) {
-      let buffer = [new Float32Array(data)];
+    socket.on('web audioData', function(data) {
+      let buffer = [new Float32Array(data.data)];
 
       worker.postMessage({command: 'record', buffer});
 
@@ -35,6 +35,7 @@
         var url = URL.createObjectURL(blob);
 
         au.src = url;
+        au.volume = data.volume;
         au.play();
 
         // Delete the just played recordings
@@ -51,7 +52,7 @@
       // Since socket.io does not support every kind of binary data but buffers,
       // we just send the buffer and recreate the array on the other side
       let array = new Float32Array(e.inputBuffer.getChannelData(0));
-      socket.emit('audioData', array.buffer);
+      socket.emit('web audioData', {data: array.buffer});
     };
 
     this.record = function() {
