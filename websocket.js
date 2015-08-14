@@ -21,12 +21,14 @@ module.exports = class WebSocket {
     if(isNaN(port)) {
       port = 8080;
     }
+    const playerSocket = new Map();
 
     // Start the websocket server
-    var io = require('socket.io')(port);
+    let io = require('socket.io')(port);
     console.log(`Successfully started the websocket on port ${port}`);
 
-    io.on('connection', function (socket) {
+
+    io.on('connection', function(socket) {
       socket.on('audioData', function(data) {
         let player = utility.getPlayer(socket.networkId);
         // Should be ALWAYS false
@@ -43,12 +45,11 @@ module.exports = class WebSocket {
           }
 
           // Is in range, so search the socket of the receiving player
-          for(let tempSocket of io.sockets.connected) {
-            // Check if this socket belongs to one of the supposed receiving players
-            if(tempSocket.networkId === tempPlayer.networkId) {
-              tempSocket.emit('audioData', {data: data.data, volume: (playerDistanceToPointInRange / (config.directChatRadius * config.directChatRadius))});
-            }
+          if(!playerSocket.has(tempPlayer.networkId)) {
+            console.warn(`No recipent socket for networkId ${tempPlayer.networkId} found.`);
+            return;
           }
+          playerSocket.get(tempPlayer.networkId).emit('audioData', {data: data.data, volume: (playerDistanceToPointInRange / (config.directChatRadius * config.directChatRadius))});
         }
       });
 
@@ -60,6 +61,15 @@ module.exports = class WebSocket {
 
       socket.on('set networkId', function(networkId) {
         socket.networkId = networkId;
+        if(playerSocket.has(networkId)) {
+          console.warn(`playerSocket already has networkId ${networkId}`);
+          return;
+        }
+        playerSocket.set(networkId, socket);
+      });
+
+      socket.on('disconnect', function(socket) {
+        playerSocket.delete(socket.networkId);
       });
     });
   }
