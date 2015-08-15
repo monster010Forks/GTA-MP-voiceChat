@@ -8,7 +8,7 @@ But we will prepare as much as possible and adapt the client side part when GTA-
 
 ## Version
 
-0.2.0
+0.2.1
 
 ## Installation
 
@@ -23,14 +23,7 @@ But we will prepare as much as possible and adapt the client side part when GTA-
  - Code cleanup
  - Rewrite Recorder functions as a ES6 class
 
-## Trello Board
- - https://trello.com/b/vuKHOi0G/gta-mp-voice-chat
-
 ## Future Milestones
-
-##### 0.2.0
- - Associate player object with the socket
- - Direct communication
 
 ##### 0.3.0
  - MP3 instead of WAV
@@ -38,7 +31,7 @@ But we will prepare as much as possible and adapt the client side part when GTA-
 ##### 1.0.0
  - GTA-MP client integration
 
-##### 1.x.0
+##### x.x.0
  - Make it more realistic, add voice panning
 
 ## Changelog
@@ -65,9 +58,16 @@ But we will prepare as much as possible and adapt the client side part when GTA-
  - Added non-performant way of getting the nearest players + the socket of the nearest players
  - Added volume decreasing depending on the players distance to the speaking player
 
+##### 0.2.1 (14.08.2015)
+ - Waffle added a way more performant way to store the sockets and associate them with the player and network id
+
 
 ## Scripts used
  - https://github.com/mattdiamond/Recorderjs
+
+## Thanks to
+  - Waffle (GTA-MP.net)
+  - Extreme (GTA-MP.net)
 
 ##  Bitcoin
 If you want to donate me some coffee for further developments, my Bitcoin address is `16w7umTeoJfPzZnDbQtuefrPRssq21jhJ5`
