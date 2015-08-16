@@ -36,7 +36,10 @@ module.exports = class WebSocket {
           return;
         }
 
-        for(let tempPlayer of g_players) {
+        const players = g_players;
+        for(let i = 0; i < players.length; i++) {
+          const tempPlayer = players[i];
+
           // Check if the player is in range of the speaking player
           let playerDistanceToPointInRange = utility.playerDistanceToPointInRange(tempPlayer, config.directChatRadius, socket.player.position.x, socket.player.position.y, socket.player.position.z);
 
